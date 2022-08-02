@@ -1,4 +1,5 @@
 const fs = require('fs').promises;
+const crypto = require('crypto');
 
 const file = 'talker.json';
 
@@ -24,8 +25,13 @@ function emailIsValid(email) {
   return true;
 }
 
+function generateToken() {
+  return crypto.randomBytes(8).toString('hex');
+}
+
 module.exports = {
   readFile,
   findInArray,
   emailIsValid,
+  generateToken,
 };

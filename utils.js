@@ -8,6 +8,11 @@ async function readFile() {
   return JSON.parse(data);
 }
 
+function findInArray(arr, id) {
+  return arr.find((item) => item.id === Number(id));
+}
+
 module.exports = {
   readFile,
+  findInArray,
 };

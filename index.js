@@ -1,5 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const talkerRouter = require('./talkerRouter'); // ROTAS INICIADAS EM /talker
+const loginRouter = require('./loginRouter'); // ROTAS INICIADAS EM /login
 
 const app = express();
 app.use(bodyParser.json());
@@ -13,10 +15,10 @@ app.get('/', (_request, response) => {
 });
 
 // TUDO O QUE FOR PARA ROTAS INICIADAS EM /talker
-const talkerRouter = require('./talkerRouter');
-
-// TUDO O QUE FOR PARA ROTAS INICIADAS EM /talker
 app.use('/talker', talkerRouter);
+
+// TUDO O QUE FOR PARA ROTAS INICIADAS EM /login
+app.use('/login', loginRouter);
 
 // RODANDO A APLICAÇÃO
 app.listen(PORT, () => {

@@ -62,4 +62,18 @@ router.put('/:id', validateToken, validateName, validateAge, validateTalk, async
     }
 });
 
+router.delete('/:id', validateToken, async (req, res) => {
+  const { id } = req.params;
+
+    try {
+      const arrPeople = await readFile();
+      const filteredArr = filterArray(arrPeople, id);
+
+      await writeFile(filteredArr);
+      return res.status(204).end();
+    } catch (error) {
+      return res.status(500).json(`Ocorreu um erro: ${error.message}`);
+    }
+});
+
 module.exports = router;

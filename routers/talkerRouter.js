@@ -1,6 +1,6 @@
 const express = require('express');
-const utils = require('./utils');
-const talkerValidator = require('./talkerValidator');
+const utils = require('../utils/utils');
+const talkerValidator = require('../middlewares/talkerValidator');
 
 const router = express.Router();
 const { validateToken, validateName, validateAge, validateTalk } = talkerValidator;

@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const loginValidator = require('./loginValidator');
-const utils = require('./utils');
+const loginValidator = require('../middlewares/loginValidator');
+const utils = require('../utils/utils');
 
 const { validateEmail, validatePassword } = loginValidator;
 const { generateToken } = utils;

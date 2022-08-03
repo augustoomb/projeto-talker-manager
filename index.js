@@ -1,7 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const talkerRouter = require('./talkerRouter'); // ROTAS INICIADAS EM /talker
-const loginRouter = require('./loginRouter'); // ROTAS INICIADAS EM /login
+const talkerRouter = require('./routers/talkerRouter'); // ROTAS INICIADAS EM /talker
+const loginRouter = require('./routers/loginRouter'); // ROTAS INICIADAS EM /login
 
 const app = express();
 app.use(bodyParser.json());

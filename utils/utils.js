@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const crypto = require('crypto');
 
-const file = 'talker.json';
+const file = './talker.json';
 
 // FUNÇÃO PARA LER ARQUIVOS
 async function readFile() {

@@ -18,6 +18,11 @@ function findInArray(arr, id) {
   return arr.find((item) => item.id === Number(id));
 }
 
+// BUSCA UM NOME OU PARTE DELE NO ARRAY
+function findPartsNameInArray(arr, partName) {
+  return arr.filter((item) => item.name.includes(partName));
+}
+
 // DEVOLVE O ARR SEM O ELEMENTO COM O id INFORMADO
 function filterArray(arr, id) {
   return arr.filter((item) => item.id !== Number(id));
@@ -63,4 +68,5 @@ module.exports = {
   writeFile,
   generateNextId,
   filterArray,
+  findPartsNameInArray,
 };

@@ -3,13 +3,32 @@ const utils = require('./utils');
 const talkerValidator = require('./talkerValidator');
 
 const router = express.Router();
-const { readFile, findInArray, writeFile, generateNextId, filterArray } = utils;
 const { validateToken, validateName, validateAge, validateTalk } = talkerValidator;
+const { readFile, findInArray, writeFile,
+  generateNextId, filterArray, findPartsNameInArray } = utils;
 
 router.get('/', async (_req, res) => {
   try {
     const arrPeople = await readFile();
     return res.status(200).json(arrPeople);
+  } catch (error) {
+    return res.status(500).json(`Ocorreu um erro: ${error.message}`);
+  }  
+});
+
+router.get('/search', validateToken, async (req, res) => {
+  const { q } = req.query;
+
+  try {
+    const arrPeople = await readFile();
+    if (q === undefined || q === '') {
+      return res.status(200).json(arrPeople);
+    }
+    const peopleFound = await findPartsNameInArray(arrPeople, q);
+    if (!peopleFound) {
+      return res.status(200).json([]);
+    }
+    return res.status(200).json(peopleFound);
   } catch (error) {
     return res.status(500).json(`Ocorreu um erro: ${error.message}`);
   }  

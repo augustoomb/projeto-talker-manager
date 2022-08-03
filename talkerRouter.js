@@ -4,7 +4,11 @@ const router = express.Router();
 
 const utils = require('./utils');
 
-const { readFile, findInArray } = utils;
+const { readFile, findInArray, writeFile } = utils;
+
+const talkerValidator = require('./talkerValidator');
+
+const { validateToken, validateName, validateAge, validateTalk } = talkerValidator;
 
 router.get('/', async (_req, res) => {
   try {
@@ -28,6 +32,21 @@ router.get('/:id', async (req, res) => {
   } catch (error) {
     return res.status(500).json(`Ocorreu um erro: ${error.message}`);
   }  
+});
+
+router.post('/', validateToken, validateName, validateAge, validateTalk, async (req, res) => {
+  const { name, age, talk } = req.body;
+
+  const teste = Math.floor(Math.random() * 100) + 5;
+
+    try {
+      const arrPeople = await readFile();
+      arrPeople.push({ name, age, id: teste, talk });
+      await writeFile(arrPeople);
+      return res.status(201).json({ id: teste, name, age, talk });
+    } catch (error) {
+      return res.status(500).json(`Ocorreu um erro: ${error.message}`);
+    }
 });
 
 module.exports = router;

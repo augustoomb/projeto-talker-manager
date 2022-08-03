@@ -9,6 +9,10 @@ async function readFile() {
   return JSON.parse(data);
 }
 
+async function writeFile(arr) {
+  await fs.writeFile(file, JSON.stringify(arr));
+}
+
 // BUSCA UM ITEM EM UM ARRAY
 function findInArray(arr, id) {
   return arr.find((item) => item.id === Number(id));
@@ -29,9 +33,21 @@ function generateToken() {
   return crypto.randomBytes(8).toString('hex');
 }
 
+function validateDate(d) {
+  const dateRegex = /^([0-2][0-9]|(3)[0-1])(\/)(((0)[0-9])|((1)[0-2]))(\/)\d{4}$/i;
+
+  if (!dateRegex.test(d)) {
+    return false;
+  }
+
+  return true;
+}
+
 module.exports = {
   readFile,
   findInArray,
   emailIsValid,
   generateToken,
+  validateDate,
+  writeFile,
 };

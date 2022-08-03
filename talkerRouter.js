@@ -3,7 +3,7 @@ const utils = require('./utils');
 const talkerValidator = require('./talkerValidator');
 
 const router = express.Router();
-const { readFile, findInArray, writeFile, generateNextId } = utils;
+const { readFile, findInArray, writeFile, generateNextId, filterArray } = utils;
 const { validateToken, validateName, validateAge, validateTalk } = talkerValidator;
 
 router.get('/', async (_req, res) => {
@@ -39,6 +39,24 @@ router.post('/', validateToken, validateName, validateAge, validateTalk, async (
       arrPeople.push({ name, age, id, talk });
       await writeFile(arrPeople);
       return res.status(201).json({ id, name, age, talk });
+    } catch (error) {
+      return res.status(500).json(`Ocorreu um erro: ${error.message}`);
+    }
+});
+
+router.put('/:id', validateToken, validateName, validateAge, validateTalk, async (req, res) => {
+  const { name, age, talk } = req.body;
+  const { id } = req.params;
+  const idNumber = Number(id);
+
+    try {
+      const arrPeople = await readFile();
+      const filteredArr = filterArray(arrPeople, id);
+
+      filteredArr.push({ name, age, id: idNumber, talk });
+
+      await writeFile(filteredArr);
+      return res.status(200).json({ id: idNumber, name, age, talk });
     } catch (error) {
       return res.status(500).json(`Ocorreu um erro: ${error.message}`);
     }

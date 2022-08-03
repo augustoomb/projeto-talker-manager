@@ -18,6 +18,11 @@ function findInArray(arr, id) {
   return arr.find((item) => item.id === Number(id));
 }
 
+// DEVOLVE O ARR SEM O ELEMENTO COM O id INFORMADO
+function filterArray(arr, id) {
+  return arr.filter((item) => item.id !== Number(id));
+}
+
 // REGEX PARA VERIFICAR SE UM E-MAIL É VALIDO
 function emailIsValid(email) {
   const emailRegex = /^\w+(\[\+\.-\]?\w)*@\w+(\[\.-\]?\w+)*\.[a-z]+$/i;
@@ -57,4 +62,5 @@ module.exports = {
   validateDate,
   writeFile,
   generateNextId,
+  filterArray,
 };

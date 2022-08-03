@@ -56,12 +56,14 @@ function validateAge(req, res, next) {
   next();
 }
 
+// USO INTERNO
 const checkTalk = (talk) => {
   if (!talk) {
     throw new Error('O campo "talk" é obrigatório');
   }
 };
 
+// USO INTERNO
 const checkWatchedAt = (talk) => {
   if (!talk.watchedAt) {
     throw new Error('O campo "watchedAt" é obrigatório');
@@ -71,11 +73,12 @@ const checkWatchedAt = (talk) => {
   }
 };
 
+// USO INTERNO
 const checkRate = (talk) => {
-  if (!talk.rate) {
+  if (talk.rate === undefined) {
     throw new Error('O campo "rate" é obrigatório');
   }
-  if (!Number.isInteger(talk.rate) || talk.rate < 1 || talk.rate > 5) {
+  if (!Number.isInteger(talk.rate) || Number(talk.rate) < 1 || Number(talk.rate) > 5) {
     throw new Error('O campo "rate" deve ser um inteiro de 1 à 5');
   }
 };

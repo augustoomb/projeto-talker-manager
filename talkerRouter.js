@@ -1,13 +1,9 @@
 const express = require('express');
-
-const router = express.Router();
-
 const utils = require('./utils');
-
-const { readFile, findInArray, writeFile } = utils;
-
 const talkerValidator = require('./talkerValidator');
 
+const router = express.Router();
+const { readFile, findInArray, writeFile, generateNextId } = utils;
 const { validateToken, validateName, validateAge, validateTalk } = talkerValidator;
 
 router.get('/', async (_req, res) => {
@@ -37,13 +33,12 @@ router.get('/:id', async (req, res) => {
 router.post('/', validateToken, validateName, validateAge, validateTalk, async (req, res) => {
   const { name, age, talk } = req.body;
 
-  const teste = Math.floor(Math.random() * 100) + 5;
-
     try {
       const arrPeople = await readFile();
-      arrPeople.push({ name, age, id: teste, talk });
+      const id = generateNextId(arrPeople);
+      arrPeople.push({ name, age, id, talk });
       await writeFile(arrPeople);
-      return res.status(201).json({ id: teste, name, age, talk });
+      return res.status(201).json({ id, name, age, talk });
     } catch (error) {
       return res.status(500).json(`Ocorreu um erro: ${error.message}`);
     }

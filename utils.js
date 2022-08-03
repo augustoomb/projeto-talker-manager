@@ -43,6 +43,12 @@ function validateDate(d) {
   return true;
 }
 
+function generateNextId(arrPeople) {
+  const ids = arrPeople.map((person) => person.id); // gera um arr com os ids presentes no arquivo
+  const highestId = Math.max.apply(null, ids); // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Math/max
+  return highestId + 1; // na linha de cima descobre qual o maior id e aqui adiciona 1
+}
+
 module.exports = {
   readFile,
   findInArray,
@@ -50,4 +56,5 @@ module.exports = {
   generateToken,
   validateDate,
   writeFile,
+  generateNextId,
 };

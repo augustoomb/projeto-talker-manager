@@ -9,6 +9,13 @@
 
 </details>
 
+<details>
+  <summary><strong>Desempenho no projeto</strong></summary><br />
+  
+  <img src="talker-manager-results.png" width="800px" >
+
+</details>
+
 # Orientações
 
 <details>
@@ -31,9 +38,9 @@
   
   > Instale as dependências [**Caso existam**] com `npm install`
 
-  :eyes: **De olho nas dicas:** 
-  1. Para rodar o projeto desta forma, **obrigatoriamente** você deve ter o `node` instalado em seu computador.
-  2. O avaliador espera que a versão do `node` utilizada seja a 16.
+  :eyes: **Dicas:** 
+  1. Para rodar o projeto desta forma, você deve ter o `node` instalado em seu computador.
+  2. A versão do `node` recomendada é a 16.
 
 </details>
 
@@ -45,6 +52,8 @@
   - `git clone git@github.com:augustoomb/projeto-talker-manager.git.
   - Entre na pasta do repositório que você acabou de clonar:
     - `cd projeto-talker-manager` 
+    - instale as dependências com `npm install`
+    
 
 </details>
 
